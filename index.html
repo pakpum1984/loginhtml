@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
+   
 </head>
 <body>
     <div class="container">
-        <form action="login.php" method="POST">
-            <h2>Loginnew</h2>
+        <form method="POST" onsubmit="submitForm(); return false;">
+            <h2>Loginnew2</h2>
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -25,33 +25,35 @@
     // JavaScript สำหรับการส่งข้อมูลไปยัง Google Apps Script
 
     function submitForm() {
-  var formData = new FormData();
-  formData.append('username', document.getElementById('username').value);
-  formData.append('password', document.getElementById('password').value);
+      var formData = new FormData();
+      formData.append('username', document.getElementById('username').value);
+      formData.append('password', document.getElementById('password').value);
 
-  fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.text();
-    } else {
-      throw new Error('เกิดข้อผิดพลาดในการส่งข้อมูล');
+      fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          throw new Error('เกิดข้อผิดพลาดในการส่งข้อมูล');
+        }
+      })
+      .then(data => {
+        if(data === 'เข้าสู่ระบบสำเร็จ') {
+            alert('Login successful');
+          
+        } else {
+          
+          alert('ไม่มีข้อมูลของท่าน');
+        }
+      })
+      .catch(error => {
+         alert('ไม่มีข้อมูลของท่าน');
+        
+      });
     }
-  })
-  .then(data => {
-    if(data === 'เข้าสู่ระบบสำเร็จ') {
-        swal("เข้าสู่ระบบสำเร็จ", "", "success");
-    } else {
-        swal("ไม่มีข้อมูลของท่าน", "", "error");
-    }
-  })
-  .catch(error => {
-    swal("เกิดข้อผิดพลาด", error.message, "error");
-  });
-}
-
 
   </script>
 </body>
