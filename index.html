@@ -94,7 +94,11 @@
             <h1>หน้า2</h1>
           <div class="input-group">
               <label for="username">ชื่อสกุล</label>
-              <input type="text" id="namebookupdate" name="namebookupdate" required>
+              <input type="text" id="namebook" name="namebook" required>
+          </div>
+          <div class="input-group">
+              <label for="username">แผนก</label>
+              <input type="text" id="namedep" name="namedep" required>
           </div>
        
             <button id="logoutBtn" onclick="logout()">ออกจากระบบ</button>
@@ -118,7 +122,8 @@
 
               $('#page1').hide();
               $('#page2').show();
-            $('#namebookupdate').val(storedFname);
+            $('#namebook').val(storedFname);
+            $('#namedep').val(storedDep);
           }
       });
 
@@ -173,7 +178,8 @@
 
                       $('#page1').hide();
                       $('#page2').show();
-                      $('#namebookupdate').val(fname);
+                      $('#namebook').val(fname);
+                     $('#namedep').val(dep);
                   }
               } else {
                   Swal.fire({
