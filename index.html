@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      axios.get('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+        params: {
+          username: username,
+          password: password
+        }
+      })
+      .then(function(response) {
+        console.log(response.data);
+        if (response.data.success) {
+          alert('Login successful');
+        } else {
+          alert('Invalid username or password');
+        }
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+
+      
+    });
+
+  </script>
+</body>
+</html>
