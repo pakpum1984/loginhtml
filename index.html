@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form id="login-form">
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <div class="container">
+        <form action="login.php" method="POST">
+            <h2>Loginnew</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
   <script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
+    // JavaScript สำหรับการส่งข้อมูลไปยัง Google Apps Script
 
-      axios.post('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
-        username: username,
-        password: password
-      })
-      .then(function(response) {
-        console.log(response.data);
-        if (response.data.success) {
-          alert('Login successful');
-        } else {
-          alert('Invalid username or password');
-        }
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
-    });
+    function submitForm() {
+  var formData = new FormData();
+  formData.append('username', document.getElementById('username').value);
+  formData.append('password', document.getElementById('password').value);
+
+  fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('เกิดข้อผิดพลาดในการส่งข้อมูล');
+    }
+  })
+  .then(data => {
+    if(data === 'เข้าสู่ระบบสำเร็จ') {
+        swal("เข้าสู่ระบบสำเร็จ", "", "success");
+    } else {
+        swal("ไม่มีข้อมูลของท่าน", "", "error");
+    }
+  })
+  .catch(error => {
+    swal("เกิดข้อผิดพลาด", error.message, "error");
+  });
+}
+
+
   </script>
 </body>
 </html>
