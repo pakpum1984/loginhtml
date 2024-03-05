@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-
 </head>
 <body>
 <div class="login-container">
@@ -33,6 +32,9 @@
         params: {
           username: username,
           password: password
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*'
         }
       })
       .then(function(response) {
@@ -46,10 +48,7 @@
       .catch(function(error) {
         console.error(error);
       });
-
-      
     });
-
   </script>
 </body>
 </html>
