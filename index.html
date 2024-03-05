@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
 </head>
 <body>
-<div class="login-container">
-    <h2>Login2</h2>
+  <div class="login-container">
+    <h2>Login</h2>
     <form id="login-form">
       <div class="input-group">
         <label for="username">Username</label>
@@ -28,14 +28,9 @@
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
 
-      axios.get('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
-        params: {
-          username: username,
-          password: password
-        },
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
+      axios.post('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+        username: username,
+        password: password
       })
       .then(function(response) {
         console.log(response.data);
