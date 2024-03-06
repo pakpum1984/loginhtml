@@ -112,13 +112,7 @@
 
           if (storedStatus === 'admin' && storedFname && storedDep) {
               // ตรวจสอบว่าข้อมูลถูกเก็บไว้ใน Local Storage แล้ว
-              Swal.fire({
-                  position: 'center',
-                  icon: 'info',
-                  title: '<h4>ยินดีต้อนรับกลับ<br>คุณ ' + storedFname +'</h4>',
-                  showConfirmButton: true,
-                  confirmButtonText: 'ปิด',
-              });
+           
 
               $('#page1').hide();
               $('#page2').show();
