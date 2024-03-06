@@ -9,19 +9,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <title>Login Page2</title>
+  <title>Login Page HTML</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
     }
 
-    .container {
+    /* .container {
       max-width: 400px;
       margin: auto;
-      /* กำหนดให้ margin ของ container เป็น auto เพื่อให้อยู่กลางตามแกนแนวนอน */
       margin-top: 20vh;
-      /* กำหนดค่า margin-top เป็นค่าของความสูงของหน้าจอที่ 20% */
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    } */
+
+    .container {
+      max-width: 400px;
+      margin: 20vh auto;
       padding: 20px;
       background-color: #fff;
       border-radius: 8px;
@@ -80,7 +89,7 @@
   </style>
 </head>
 
-<body>
+<body onload="clearForm(); ">
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -89,7 +98,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">ลงทะเบียน</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" id="registerFormmodal" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
         <!-- Modal body -->
@@ -132,7 +141,7 @@
   <div class="container">
     <section id="page1">
       <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
-        <h2>Login</h2>
+        <h2>Login HTML 2</h2>
         <div class="input-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" required>
@@ -192,6 +201,14 @@
 
     // ใน registerUser()
     function registerUser() {
+
+      event.preventDefault();
+      Swal.fire({
+        position: 'center',
+        title: '<h4>กำลังบันทึกข้อมูล...</h4>',
+        showConfirmButton: false,
+      });
+      Swal.showLoading();
       // Fetch data from the form
       var regUsername = document.getElementById('regUsername').value;
       var regPassword = document.getElementById('regPassword').value;
@@ -216,9 +233,12 @@
             position: 'center',
             icon: 'info',
             title: '<h4>ลงทะเบียนสำเร็จ</h4>',
-            showConfirmButton: true,
-            confirmButtonText: 'ปิด',
+            showConfirmButton: false,
+            //confirmButtonText: 'ปิด',
+            timer: 1500,
           });
+          document.getElementById('registerForm').reset();
+          document.getElementById('registerFormmodal').click();
         },
         function (error) {
           // Handle the error
@@ -227,7 +247,7 @@
       );
     }
 
-    // ใน submitForm()
+
     // ใน submitForm()
     function submitForm() {
       event.preventDefault();
@@ -247,15 +267,15 @@
       fetchData(formData,
         function (data) {
           // Handle the successful response
-          console.log(data);  // เช็คข้อมูลที่ได้รับ
-          if (data !== false) { // ตรวจสอบว่ามีข้อมูลที่ถูกส่งกลับมาหรือไม่
+          console.log(data);
+          if (data !== false) {
             var username = data.username;
             var password = data.password;
             var fname = data.name;
             var dep = data.dep;
             var status = data.status;
 
-            if (status === 'user') { // ตรวจสอบว่าสถานะเป็น admin หรือไม่
+            if (status === 'user') {
               localStorage.setItem('status', status);
               localStorage.setItem('fname', fname);
               localStorage.setItem('dep', dep);
@@ -264,8 +284,9 @@
                 position: 'center',
                 icon: 'success',
                 title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
-                showConfirmButton: true,
-                confirmButtonText: 'กดปิด',
+                showConfirmButton: false,
+                //confirmButtonText: 'กดปิด',
+                timer: 1500,
               });
 
               $('#page1').hide();
@@ -291,7 +312,6 @@
       );
     }
 
-
     function logout() {
       Swal.fire({
         title: 'คุณต้องการออกจากระบบหรือไม่?',
@@ -309,30 +329,24 @@
         }
       });
     }
-  </script>
-  <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          var storedStatus = localStorage.getItem('status');
-          var storedFname = localStorage.getItem('fname');
-          var storedDep = localStorage.getItem('dep');
 
-          if (storedStatus === 'admin' && storedFname && storedDep) {
-              // ตรวจสอบว่าข้อมูลถูกเก็บไว้ใน Local Storage แล้ว
-              Swal.fire({
-                  position: 'center',
-                  icon: 'info',
-                  title: '<h4>ยินดีต้อนรับกลับ<br>คุณ ' + storedFname +'</h4>',
-                  showConfirmButton: true,
-                  confirmButtonText: 'ปิด',
-              });
+    // ในส่วนที่เพิ่มเติมนี้ เราจะใช้ localStorage.getItem() เพื่อตรวจสอบว่ามีข้อมูลที่เราต้องการอยู่ใน Local Storage หรือไม่
+    document.addEventListener('DOMContentLoaded', function () {
+      var storedStatus = localStorage.getItem('status');
+      var storedFname = localStorage.getItem('fname');
+      var storedDep = localStorage.getItem('dep');
 
-              $('#page1').hide();
-              $('#page2').show();
-              $('#namebook').val(storedFname);
-              $('#namedep').val(storedDep);
-          }
-      });
+      if (storedStatus === 'user' && storedFname && storedDep) {
+
+
+        $('#page1').hide();
+        $('#page2').show();
+        $('#namebook').val(storedFname);
+        $('#namedep').val(storedDep);
+      }
+    });
   </script>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
