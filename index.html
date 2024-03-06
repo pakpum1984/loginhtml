@@ -358,7 +358,8 @@
           </div>
         </div>
 
-         <input type="text" class="form-control" id="namestatus" name="namestatus" value="รออนุมัติ" style="display:none;">
+        <input type="text" class="form-control" id="namestatus" name="namestatus" value="รออนุมัติ"
+          style="display:none;">
 
 
         <div class="d-flex justify-content-center mt-4">
@@ -405,71 +406,74 @@
 
 
     function booksubmitForm() {
-      event.preventDefault();
-      Swal.fire({
-        position: 'center',
-        title: '<h4>กำลังบันทึกข้อมูล...</h4>',
-        showConfirmButton: false,
-      });
-      Swal.showLoading();
+        event.preventDefault();
+        Swal.fire({
+            position: 'center',
+            title: '<h4>กำลังบันทึกข้อมูล...</h4>',
+            showConfirmButton: false,
+        });
+        Swal.showLoading();
 
-      // Fetch data from the form
-      var namebook = document.getElementById('namebook').value;
-      var namedep = document.getElementById('namedep').value;
-      var namecar = document.getElementById('namecar').value;
-      var nameloca = document.getElementById('nameloca').value;
-      var namestartDate = document.getElementById('namestartDate').value;
-      var namestartTime = document.getElementById('namestartTime').value;
-      var nameendTime = document.getElementById('nameendTime').value;
-      var namedrivestatus = document.getElementById('namedrivestatus').value;
-      var nameother = document.getElementById('nameother').value;
-      var namestatus = document.getElementById('namestatus').value;
+        // Fetch data from the form
+        var namebook = document.getElementById('namebook').value;
+        var namedep = document.getElementById('namedep').value;
+        var namecar = document.getElementById('namecar').value;
+        var nameloca = document.getElementById('nameloca').value;
+        var namestartDate = document.getElementById('namestartDate').value;
+        var namestartTime = document.getElementById('namestartTime').value;
+        var nameendTime = document.getElementById('nameendTime').value;
+        var namedrivestatus = document.getElementById('namedrivestatus').value;
+        var nameother = document.getElementById('nameother').value;
+        var namestatus = document.getElementById('namestatus').value;
 
-      // Create a FormData object to send the data
-      var formData = new FormData();
-      formData.append('namebook', namebook);
-      formData.append('namedep', namedep);
-      formData.append('namecar', namecar);
-      formData.append('nameloca', nameloca);
-      formData.append('namestartDate', namestartDate);
-      formData.append('namestartTime', namestartTime);
-      formData.append('nameendTime', nameendTime);
-      formData.append('namedrivestatus', namedrivestatus);
-      formData.append('nameother', nameother);
-      formData.append('namestatus', namestatus);
-      // Call the fetchData function to send the data to the server
-      fetchData(formData,
-        function (data) {
-          // Handle the successful response
-          console.log(data);
-          if (data === false) {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: '<h4>บันทึกข้อมูลสำเร็จ</h4>',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            document.getElementById('bookmyForm').reset();
-          } else {
+        // Create a FormData object to send the data
+        var formData = new FormData();
+        formData.append('namebook', namebook);
+        formData.append('namedep', namedep);
+        formData.append('namecar', namecar);
+        formData.append('nameloca', nameloca);
+        formData.append('namestartDate', namestartDate);
+        formData.append('namestartTime', namestartTime);
+        formData.append('nameendTime', nameendTime);
+        formData.append('namedrivestatus', namedrivestatus);
+        formData.append('nameother', nameother);
+        formData.append('namestatus', namestatus);
+
+        fetch('https://script.google.com/macros/s/AKfycbztSG9XWKnc2I04RhMpY7swW8ztLbNE01vkhTICq-AUx0cTR2kilOzjRT2IhCGQDnIN/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Handle the successful response
+            console.log(data);
+            if (data == "true") {
+                document.getElementById('bookmyForm').reset();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '<h4>บันทึกข้อมูลสำเร็จ</h4>',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '<h4>มีการจองวันที่และช่วงเวลานี้แล้ว</h4>',
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK',
+                });
+            }
+        })
+        .catch(error => {
             // Handle the error
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: '<h4>มีข้อผิดพลาดเกิดขึ้น</h4>',
-              showConfirmButton: true,
-              confirmButtonText: 'OK',
-            });
-          }
-        },
-        function (error) {
-          // Handle the error
-          console.error('Error:', error);
-        }
-      );
+            console.error('Error:', error);
+        });
     }
 
-    
+
+
     // ใน registerUser()
     function registerUser() {
 
