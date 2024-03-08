@@ -578,7 +578,7 @@
             var dep = data.dep;
             var status = data.status;
 
-            if (status === 'user') {
+            if (status === 'usercar') {
               localStorage.setItem('status', status);
               localStorage.setItem('fname', fname);
               localStorage.setItem('dep', dep);
@@ -639,7 +639,7 @@
       var storedFname = localStorage.getItem('fname');
       var storedDep = localStorage.getItem('dep');
 
-      if (storedStatus === 'user' && storedFname && storedDep) {
+      if (storedStatus === 'usercar' && storedFname && storedDep) {
 
 
         $('#page1').hide();
