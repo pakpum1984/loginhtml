@@ -155,7 +155,7 @@
 
   <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="##" style="color:white;">Bookkingcar</a>
+      <a class="navbar-brand" href="##" style="color:white;">Bookkingcar9</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -578,7 +578,7 @@
             var depcar = data.depcar;
             var statuscar = data.statuscar;
 
-            if (status === 'usercar') {
+            if (statuscar === 'usercar') {
               localStorage.setItem('statuscar', statuscar);
               localStorage.setItem('fnamecar', fnamecar);
               localStorage.setItem('depcar', depcar);
@@ -586,7 +586,7 @@
               Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
+                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fnamecar + '</h4>',
                 showConfirmButton: false,
                 //confirmButtonText: 'กดปิด',
                 timer: 1500,
@@ -594,8 +594,8 @@
 
               $('#page1').hide();
               $('#page2').show();
-              $('#namebook').val(fname);
-              $('#namedep').val(dep);
+              $('#namebook').val(fnamecar);
+              $('#namedep').val(depcar);
             }
           } else {
             // แสดงข้อความเมื่อไม่พบข้อมูล
