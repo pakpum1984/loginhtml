@@ -572,16 +572,16 @@
           // Handle the successful response
           console.log(data);
           if (data !== false) {
-            var username = data.username;
-            var password = data.password;
-            var fname = data.name;
-            var dep = data.dep;
-            var status = data.status;
+            var usernamecar = data.usernamecar;
+            var passwordcar = data.passwordcar;
+            var fnamecar = data.namecar;
+            var depcar = data.depcar;
+            var statuscar = data.statuscar;
 
             if (status === 'usercar') {
-              localStorage.setItem('status', status);
-              localStorage.setItem('fname', fname);
-              localStorage.setItem('dep', dep);
+              localStorage.setItem('statuscar', statuscar);
+              localStorage.setItem('fnamecar', fnamecar);
+              localStorage.setItem('depcar', depcar);
 
               Swal.fire({
                 position: 'center',
@@ -635,17 +635,17 @@
 
     // ในส่วนที่เพิ่มเติมนี้ เราจะใช้ localStorage.getItem() เพื่อตรวจสอบว่ามีข้อมูลที่เราต้องการอยู่ใน Local Storage หรือไม่
     document.addEventListener('DOMContentLoaded', function () {
-      var storedStatus = localStorage.getItem('status');
-      var storedFname = localStorage.getItem('fname');
-      var storedDep = localStorage.getItem('dep');
+      var storedStatuscar = localStorage.getItem('statuscar');
+      var storedFnamecar = localStorage.getItem('fnamecar');
+      var storedDepcar = localStorage.getItem('depcar');
 
       if (storedStatus === 'usercar' && storedFname && storedDep) {
 
 
         $('#page1').hide();
         $('#page2').show();
-        $('#namebook').val(storedFname);
-        $('#namedep').val(storedDep);
+        $('#namebook').val(storedFnamecar);
+        $('#namedep').val(storedDepcar);
       }
     });
   </script>
