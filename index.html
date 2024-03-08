@@ -155,7 +155,7 @@
 
   <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="##" style="color:white;">Bookcar</a>
+      <a class="navbar-brand" href="##" style="color:white;">Bookkingcar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -432,6 +432,8 @@
 
   <script>
 
+
+ var googleScriptUrl = 'https://script.google.com/macros/s/AKfycbx9K7JtlAMab0__j3ppEKLHOHXsWRJxedA3dL_1ziTk5q6fPWWrNxh0cb3BLeL63nbigA/exec';
   //ป้องกันเลือกวันที่ย้อนหลัง
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -468,7 +470,7 @@
 
       var formData = new FormData(document.getElementById("bookmyForm"));
       formData.append('action', 'submitForm'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ submitForm
-       fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+       fetch(googleScriptUrl, {
             method: 'POST',
             body: formData
         })
@@ -522,7 +524,7 @@
 
       var formData = new FormData(document.getElementById("registerForm"));
       formData.append('action', 'register'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ submitForm
-       fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+       fetch(googleScriptUrl, {
             method: 'POST',
             body: formData
         })
@@ -561,7 +563,7 @@
 
       var formData = new FormData(document.getElementById("loginForm"));
       formData.append('action', 'loginhtml'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ submitForm
-       fetch('https://script.google.com/macros/s/AKfycbypjGKYQbbGFJqla3TosdHghZZ1uZIEiQDUPT3hSQBABAT1ryb2PNF9GNoRcsGVZW_X/exec', {
+       fetch(googleScriptUrl, {
             method: 'POST',
             body: formData
         })
@@ -576,7 +578,7 @@
             var dep = data.dep;
             var status = data.status;
 
-            if (status === 'userbook') {
+            if (status === 'user') {
               localStorage.setItem('status', status);
               localStorage.setItem('fname', fname);
               localStorage.setItem('dep', dep);
@@ -637,7 +639,7 @@
       var storedFname = localStorage.getItem('fname');
       var storedDep = localStorage.getItem('dep');
 
-      if (storedStatus === 'userbook' && storedFname && storedDep) {
+      if (storedStatus === 'user' && storedFname && storedDep) {
 
 
         $('#page1').hide();
