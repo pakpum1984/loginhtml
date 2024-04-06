@@ -997,6 +997,7 @@
         if (result.isConfirmed) {
           document.getElementById('page2').style.display = 'none';
           document.getElementById('page1').style.display = 'block';
+          document.getElementById('loginForm').reset();
           localStorage.clear();
           location.reload();
         }
