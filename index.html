@@ -145,14 +145,14 @@
             </div>
             <div class="input-group">
               <label for="regPassword">Password</label>
-              <input type="password" id="regPassword" name="regPassword" maxlength="6" required>
+              <input type="password" id="regPassword" name="regPassword" minlength="6" maxlength="6" required>
             </div>
             <div class="input-group">
-              <label for="fullName">Full Name</label>
+              <label for="fullName">ชื่อ นามสกุล</label>
               <input type="text" id="fullName" name="fullName" required>
             </div>
             <div class="input-group">
-              <label for="department">Department</label>
+              <label for="department">แผนก</label>
               <input type="text" id="department" name="department" required>
             </div>
 
@@ -201,7 +201,7 @@
         </div>
         <div class="input-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" maxlength="6" required>
+          <input type="password" id="password" name="password" minlength="6" maxlength="6" required>
         </div>
         <button id="button" type="submit" onclick="loginForm()">Login</button>
         <br> <br> <br>
@@ -746,7 +746,7 @@
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: '<h4>รหัสผ่านต้องประกอบด้วยตัวเลขหรืออักษรภาษาอังกฤษอย่างน้อย 1 ตัวอักษร</h4>',
+          title: '<h4>รหัสผ่านต้องประกอบด้วยตัวเลขหรืออักษรภาษาอังกฤษอย่างน้อย 1 ตัวอักษรและไม่ต่ำกว่า6หลัก</h4>',
           showConfirmButton: true,
           confirmButtonText: 'OK',
         });
